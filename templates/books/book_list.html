@@ -1,0 +1,49 @@
+{% extends 'books/base.html' %}
+
+{% block title %}book list{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 d-flex">
+        <small>books</small>
+    </h1>
+    <a href="{% url 'books:book_create' %}"><button type="button" class="btn btn-outline-danger"><strong>CREATE</strong></button></a>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+    {% if object_list %}
+        <div class="col-12 pt-4" style="overflow-x: scroll">
+            <table class="table">
+
+
+                {% for book in object_list %}
+                <div class="text-light">
+                <tr>
+                    <td class="text-light"><strong>{{ book.title }}</strong></td>
+
+                <div class="icons color-danger">
+                    <td><a style="width: 40px; height: 40px;"  href="{% url 'books:book_detail' book.pk %}"><button type="button" class="btn btn-outline-danger btn-sm">READ</button></a></td>
+                    <td><a style="width: 40px; height: 40px;"  href="{% url 'books:book_update' book.pk %}"><button type="button" class="btn btn-outline-danger btn-sm">UPDATE</button></a></td>
+                    <td><a style="width: 40px; height: 40px;"  href="{% url 'books:book_delete' book.pk %}"><button type="button" class="btn btn-outline-danger btn-sm">DELETE</button></a></td>
+
+
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% else %}
+    <div class="col-12">
+
+    </div>
+    {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

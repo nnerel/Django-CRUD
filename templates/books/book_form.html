@@ -1,0 +1,30 @@
+{% extends 'books/base.html' %}
+
+
+{% block title %}{% if request.path == '/add' %}add{% else %}edit{% endif %}{% endblock title %}
+
+
+
+{% block content %}
+<div class="container">
+<h1 class="my-4">{% if request.path == '/add' %} New Product {% else %} Edit {% endif %}
+{% if request.path != '/add' %}<small>{{ product.name }}</small>{% endif %}
+</h1>
+
+<div class="row">
+<div class="col-12">
+<form method="post">
+{% csrf_token %}
+{% for field in form %}
+<div class="form-group">
+{{ field.label_tag }}
+{{ field }}
+</div>
+{% endfor %}
+<input type="submit" {% if request.path == '/add' %} value="create" {% else %} value="update" {% endif %} class="btn btn-success"/>
+<a href="{% url 'books:book_list' %}"><button type="button" class="btn btn-secondary">Back</button></a>
+</form>
+</div>
+</div>
+</div>
+{% endblock content %}
