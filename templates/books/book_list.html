@@ -7,7 +7,10 @@
     <h1 class="my-4 d-flex">
         <small>books</small>
     </h1>
-    <a href="{% url 'books:book_create' %}"><button type="button" class="btn btn-outline-danger"><strong>CREATE</strong></button></a>
+    <a href="{% url 'books:book_create' %}">
+        <button type="button" class="btn btn-outline-danger">
+            <strong>CREATE</strong>
+        </button></a><br><br>
 
     {% if messages %}
         {% for message in messages %}
